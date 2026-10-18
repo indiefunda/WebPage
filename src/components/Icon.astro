@@ -1,0 +1,27 @@
+---
+const { name, size = 16, strokeWidth = 1.25 } = Astro.props;
+---
+
+<svg
+  width={size}
+  height={size}
+  viewBox="0 0 16 16"
+  fill="none"
+  stroke="currentColor"
+  stroke-width={strokeWidth}
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+>
+  {name === 'arrow-up-right' && <><path d="M4 12 12 4" /><path d="M5 4h7v7" /></>}
+  {name === 'arrow-right' && <><path d="M2 8h11" /><path d="m9 4 4 4-4 4" /></>}
+  {name === 'arrow-down' && <><path d="M8 2v11" /><path d="m4 9 4 4 4-4" /></>}
+  {name === 'chevron-left' && <path d="M10 2 4 8l6 6" />}
+  {name === 'chevron-right' && <path d="m6 2 6 6-6 6" />}
+  {name === 'close' && <><path d="M3 3l10 10" /><path d="M13 3 3 13" /></>}
+  {name === 'copy' && <><rect x="5" y="5" width="8" height="9" rx="1" /><path d="M11 5V3a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h2" /></>}
+  {name === 'mail' && <><rect x="1.5" y="3" width="13" height="10" rx="1" /><path d="m2 4 6 5 6-5" /></>}
+  {name === 'download' && <><path d="M8 2v8" /><path d="m4.5 7 3.5 3.5L11.5 7" /><path d="M2 13h12" /></>}
+  {name === 'menu' && <><path d="M2 5h12" /><path d="M2 11h8" /></>}
+</svg>

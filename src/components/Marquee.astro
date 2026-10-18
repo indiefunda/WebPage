@@ -1,0 +1,22 @@
+---
+const items = [
+  'Drawing',
+  'Installation',
+  'Mixed media',
+  'Athens, Greece',
+  'Works & projects',
+  'Ink / Pencil / Pastel',
+];
+---
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__track">
+    {[0, 1].map(() => (
+      <div class="marquee__group">
+        {items.map((item) => (
+          <span class="marquee__item">{item}</span>
+        ))}
+      </div>
+    ))}
+  </div>
+</div>

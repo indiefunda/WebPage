@@ -1,0 +1,187 @@
+---
+import Icon from './Icon.astro';
+---
+
+<dialog class="lightbox" data-lightbox-dialog aria-labelledby="lightbox-title">
+  <div class="lightbox__top">
+    <p class="lightbox__count eyebrow" aria-live="polite">
+      <span data-lightbox-current>01</span> / <span data-lightbox-total>01</span>
+    </p>
+    <button class="lightbox__close" type="button" data-lightbox-close>
+      <span>Close</span>
+      <Icon name="close" size={16} />
+    </button>
+  </div>
+
+  <div class="lightbox__stage">
+    <button class="lightbox__nav lightbox__nav--prev" type="button" data-lightbox-prev aria-label="Previous artwork">
+      <Icon name="chevron-left" size={17} />
+    </button>
+
+    <figure class="lightbox__figure">
+      <div class="lightbox__image-wrap">
+        <img
+          class="lightbox__image"
+          data-lightbox-image
+          src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+          alt=""
+        />
+      </div>
+      <figcaption class="lightbox__caption">
+        <div>
+          <h2 id="lightbox-title" data-lightbox-title></h2>
+          <p class="micro meta" data-lightbox-meta></p>
+        </div>
+        <p class="micro project" data-lightbox-project></p>
+      </figcaption>
+    </figure>
+
+    <button class="lightbox__nav lightbox__nav--next" type="button" data-lightbox-next aria-label="Next artwork">
+      <Icon name="chevron-right" size={17} />
+    </button>
+  </div>
+</dialog>
+
+<script>
+  const dialog = document.querySelector('[data-lightbox-dialog]');
+
+  if (dialog) {
+    const image = dialog.querySelector('[data-lightbox-image]');
+    const title = dialog.querySelector('[data-lightbox-title]');
+    const meta = dialog.querySelector('[data-lightbox-meta]');
+    const project = dialog.querySelector('[data-lightbox-project]');
+    const current = dialog.querySelector('[data-lightbox-current]');
+    const total = dialog.querySelector('[data-lightbox-total]');
+    const closeButton = dialog.querySelector('[data-lightbox-close]');
+    const prevButton = dialog.querySelector('[data-lightbox-prev]');
+    const nextButton = dialog.querySelector('[data-lightbox-next]');
+
+    let items = [];
+    let currentIndex = 0;
+
+    const getVisibleTriggers = () =>
+      Array.from(document.querySelectorAll('[data-lightbox]')).filter((trigger) => {
+        if (trigger.closest('[hidden]')) return false;
+        const rect = trigger.getBoundingClientRect();
+        return rect.width > 0 && rect.height > 0;
+      });
+
+    const readTrigger = (trigger) => ({
+      src: trigger.dataset.lightboxSrc,
+      srcset: trigger.dataset.lightboxSrcset,
+      alt: trigger.dataset.lightboxAlt || '',
+      title: trigger.dataset.lightboxTitle || '',
+      meta: trigger.dataset.lightboxMeta || '',
+      project: trigger.dataset.lightboxProject || '',
+      width: trigger.dataset.lightboxWidth || '',
+      height: trigger.dataset.lightboxHeight || '',
+    });
+
+    const preloadNeighbours = () => {
+      if (items.length < 2) return;
+      [1, -1].forEach((offset) => {
+        const item = items[(currentIndex + offset + items.length) % items.length];
+        if (item?.src) {
+          const preload = new Image();
+          preload.src = item.src;
+        }
+      });
+    };
+
+    const render = () => {
+      const item = items[currentIndex];
+      if (!item) return;
+
+      image.src = item.src;
+      if (item.srcset) {
+        image.srcset = item.srcset;
+        image.sizes = '(max-width: 760px) 94vw, 82vw';
+      } else {
+        image.removeAttribute('srcset');
+      }
+      image.alt = item.alt;
+      if (item.width) image.width = item.width;
+      if (item.height) image.height = item.height;
+      title.textContent = item.title;
+      meta.textContent = item.meta;
+      project.textContent = item.project;
+      current.textContent = String(currentIndex + 1).padStart(2, '0');
+      total.textContent = String(items.length).padStart(2, '0');
+
+      const single = items.length < 2;
+      prevButton.hidden = single;
+      nextButton.hidden = single;
+      preloadNeighbours();
+    };
+
+    const open = (trigger) => {
+      items = getVisibleTriggers().map(readTrigger);
+      const requestedSrc = trigger.dataset.lightboxSrc;
+      currentIndex = Math.max(
+        items.findIndex((item) => item.src === requestedSrc && item.title === trigger.dataset.lightboxTitle),
+        0,
+      );
+      render();
+      if (typeof dialog.showModal === 'function') {
+        dialog.showModal();
+      } else {
+        dialog.setAttribute('open', '');
+      }
+      document.body.classList.add('lightbox-open');
+      closeButton.focus();
+    };
+
+    const close = () => {
+      if (typeof dialog.close === 'function') {
+        dialog.close();
+      } else {
+        dialog.removeAttribute('open');
+        document.body.classList.remove('lightbox-open');
+      }
+    };
+
+    const move = (direction) => {
+      if (items.length < 2) return;
+      currentIndex = (currentIndex + direction + items.length) % items.length;
+      render();
+    };
+
+    document.addEventListener('click', (event) => {
+      const trigger = event.target.closest('[data-lightbox]');
+      if (!trigger) return;
+      event.preventDefault();
+      open(trigger);
+    });
+
+    closeButton.addEventListener('click', close);
+    prevButton.addEventListener('click', () => move(-1));
+    nextButton.addEventListener('click', () => move(1));
+
+    dialog.addEventListener('click', (event) => {
+      if (event.target === dialog || event.target.classList.contains('lightbox__stage') || event.target.classList.contains('lightbox__image-wrap')) {
+        close();
+      }
+    });
+
+    dialog.addEventListener('close', () => {
+      document.body.classList.remove('lightbox-open');
+      image.removeAttribute('srcset');
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (!dialog.open) return;
+      if (event.key === 'ArrowRight') {
+        event.preventDefault();
+        move(1);
+      }
+      if (event.key === 'ArrowLeft') {
+        event.preventDefault();
+        move(-1);
+      }
+    });
+
+    window.addEventListener('pageshow', () => {
+      document.body.classList.remove('lightbox-open');
+    });
+  }
+</script>

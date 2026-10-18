@@ -1,0 +1,53 @@
+---
+import SiteMark from './SiteMark.astro';
+import Icon from './Icon.astro';
+import { site } from '../data/projects';
+
+const year = new Date().getFullYear();
+const links = [
+  { label: 'Work', href: '/work' },
+  { label: 'Projects', href: '/projects' },
+  { label: 'Bio / CV', href: '/bio' },
+  { label: 'Contact', href: '/contact' },
+];
+---
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <p class="eyebrow">Natalia Afentoulidou — Artist</p>
+        <p class="footer-name">
+          <a href="/">Drawing rooms,<br /><em>rooms for drawing.</em></a>
+        </p>
+      </div>
+
+      <nav class="footer-nav" aria-label="Footer">
+        <h2>Index</h2>
+        <div class="footer-links">
+          {links.map((link) => (
+            <a href={link.href}>{link.label}</a>
+          ))}
+        </div>
+      </nav>
+
+      <div class="footer-contact">
+        <h2>Contact</h2>
+        <p>For exhibitions, collaborations, commissions and studio visits.</p>
+        <a class="footer-mail" href={`mailto:${site.email}`}>{site.email}</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© {year} Natalia Afentoulidou. All images © the artist.</p>
+      <p class="footer-location">
+        <SiteMark size={13} class="footer-mark" />
+        Athens, Greece
+      </p>
+      <a class="back-top" href="#top">
+        Back to top
+        <Icon name="arrow-up-right" size={12} />
+      </a>
+    </div>
+  </div>
+</footer>

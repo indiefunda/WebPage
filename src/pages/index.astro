@@ -1,0 +1,300 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ArtImage from '../components/ArtImage.astro';
+import Icon from '../components/Icon.astro';
+import Marquee from '../components/Marquee.astro';
+import { projects, getWork, site } from '../data/projects';
+import { lightboxAttrs, formatMeta } from '../lib/lightbox';
+
+const heroWork = getWork('ih-01');
+const selectedWorks = [getWork('ih-06'), getWork('ih-02'), getWork('ih-03')];
+const [leadProject, ...pairProjects] = projects;
+
+const studioImage = {
+  src: '/images/studio-1600.jpg',
+  srcset: '/images/studio-960.jpg 960w, /images/studio-1600.jpg 1600w',
+  width: 1600,
+  height: 1071,
+};
+---
+
+<BaseLayout
+  title="Natalia Afentoulidou — Artist"
+  description="The work of Athens-based artist Natalia Afentoulidou: drawings on paper, installations and mixed-media rooms where bodies, shelters and other living things get entangled."
+>
+  <section class="hero wrap" aria-labelledby="hero-title">
+    <div class="hero-orbit" aria-hidden="true"></div>
+
+    <div class="hero-kicker">
+      <p class="eyebrow">Natalia Afentoulidou — Artist</p>
+      <p class="eyebrow">
+        Athens, Greece<br />
+        <span class="hero-medium">Drawing · Installation · Mixed media</span>
+      </p>
+    </div>
+
+    <div class="hero-main">
+      <h1 class="hero-title" id="hero-title">
+        <span class="hero-line hero-line--1"><span>Natalia</span></span>
+        <span class="hero-line hero-line--2"><em>Afentoulidou</em></span>
+      </h1>
+
+      <figure class="hero-figure">
+        <a href="/projects/life-comes-in-circles" aria-label="View the project Life comes in circles">
+          <div class="hero-image-wrap">
+            <ArtImage
+              imageKey={heroWork.image}
+              alt={heroWork.alt}
+              sizes="(max-width: 850px) 76vw, 31vw"
+              loading="eager"
+              fetchpriority="high"
+            />
+          </div>
+        </a>
+        <figcaption class="micro">
+          <span><em>I hear you</em>, 2026</span>
+          <span>Ink &amp; pencil<br />140 × 100 cm</span>
+        </figcaption>
+      </figure>
+    </div>
+
+    <div class="hero-foot">
+      <p class="hero-statement">
+        Drawings and rooms where bodies, shelters and <em>other living things</em> get entangled.
+      </p>
+      <a class="scroll-cue" href="#practice" aria-label="Scroll to practice">
+        <span class="micro">Scroll</span>
+        <Icon name="arrow-down" size={16} />
+      </a>
+      <p class="hero-index">
+        <span class="eyebrow">Selected works</span>
+        <strong>2026</strong>
+      </p>
+    </div>
+  </section>
+
+  <Marquee />
+
+  <section class="section intro wrap" id="practice" aria-labelledby="practice-title">
+    <div class="intro-grid">
+      <aside class="intro-aside" data-reveal>
+        <p class="eyebrow eyebrow--accent">Practice / 01</p>
+        <p class="micro">Athens,<br />Greece</p>
+        <p class="dot-line micro"><span class="dot"></span> Lives &amp; works</p>
+      </aside>
+
+      <div class="intro-copy">
+        <h2 class="intro-statement" id="practice-title" data-reveal>
+          A practice of <em>listening</em>, tangling, and refusing to look away.
+        </h2>
+
+        <div class="intro-body">
+          <div data-reveal style="--delay: 80ms">
+            <p class="eyebrow">The work</p>
+            <p>
+              Natalia Afentoulidou works between ink on paper and large-scale installation.
+              Her forms repeat, mutate and accumulate — never quite settling into a single
+              body, room or story.
+            </p>
+          </div>
+          <div data-reveal style="--delay: 160ms">
+            <p class="eyebrow">The rooms</p>
+            <p>
+              Across three projects, she builds places where tenderness and refusal share the
+              same architecture: porous drawings, provisional shelters, and rooms that behave
+              like drawings.
+            </p>
+          </div>
+        </div>
+
+        <div class="intro-signature" data-reveal style="--delay: 220ms">
+          <span class="dot" aria-hidden="true"></span>
+          <a class="text-link" href="/bio">
+            More about Natalia
+            <Icon name="arrow-up-right" size={13} />
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section selected wrap" aria-labelledby="selected-title">
+    <div class="section-head">
+      <p class="eyebrow section-index">Selected works / 02</p>
+      <h2 class="section-title" id="selected-title">New drawings, <em>2026</em></h2>
+      <a class="text-link section-head-link" href="/work">
+        All 27 works
+        <Icon name="arrow-up-right" size={13} />
+      </a>
+    </div>
+
+    <div class="selected-grid">
+      {selectedWorks.map((work, index) => {
+        const project = projects.find((item) => item.id === work.projectId);
+        return (
+          <article class={`selected-card selected-card--${index + 1}`} data-reveal>
+            <a class="selected-card__link" {...lightboxAttrs(work, project)}>
+              <div class="selected-card__media">
+                <ArtImage
+                  imageKey={work.image}
+                  alt={work.alt}
+                  sizes={index === 0 ? '(max-width: 900px) 100vw, 40vw' : '(max-width: 900px) 86vw, 48vw'}
+                />
+                <span class="view-pill">View</span>
+              </div>
+              <div class="selected-card__caption">
+                <h3>{work.title}</h3>
+                <p class="micro">{work.year}</p>
+                <p>{formatMeta(work)}</p>
+              </div>
+            </a>
+          </article>
+        );
+      })}
+
+      <div class="selected-note" data-reveal style="--delay: 120ms">
+        <p>
+          <em>Life comes in circles</em> gathers the body as a place of contact — porous,
+          plural, always answering.
+        </p>
+        <a class="text-link" href="/projects/life-comes-in-circles">
+          Enter the project
+          <Icon name="arrow-up-right" size={13} />
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section project-band" aria-labelledby="projects-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow section-index">Projects / 03</p>
+        <h2 class="section-title" id="projects-title">Three <em>rooms</em> of thought</h2>
+        <a class="text-link section-head-link" href="/projects">
+          All projects
+          <Icon name="arrow-up-right" size={13} />
+        </a>
+      </div>
+
+      <a class="project-lead" href={`/projects/${leadProject.id}`} data-reveal>
+        <div class="project-lead__copy">
+          <p class="eyebrow project-number">
+            <span>Project {leadProject.number}</span>
+            <span>{leadProject.category}</span>
+          </p>
+          <h3 class="project-lead__title">{leadProject.title}</h3>
+          <p class="project-lead__tagline">{leadProject.tagline}</p>
+          <p class="project-lead__desc">{leadProject.summary}</p>
+          <p class="project-lead__meta micro">
+            <span>{leadProject.year}</span>
+            <span>13 works</span>
+            <span>Works on paper</span>
+          </p>
+        </div>
+        <div class="project-lead__image">
+          <ArtImage
+            imageKey={leadProject.cover}
+            alt={leadProject.works[0].alt}
+            sizes="(max-width: 900px) 100vw, 58vw"
+          />
+          <span class="project-lead__arrow" aria-hidden="true">
+            <Icon name="arrow-up-right" size={20} />
+          </span>
+        </div>
+      </a>
+
+      <div class="project-pair">
+        {pairProjects.map((project, index) => (
+          <a
+            class="project-card"
+            href={`/projects/${project.id}`}
+            data-reveal
+            style={`--delay: ${index * 90}ms`}
+          >
+            <div class="project-card__top micro">
+              <span>Project {project.number}</span>
+              <span>{project.category}</span>
+            </div>
+            <div class="project-card__image">
+              <ArtImage
+                imageKey={project.cover}
+                alt={project.works[0].alt}
+                sizes="(max-width: 900px) 100vw, 48vw"
+              />
+            </div>
+            <h3 class="project-card__title">
+              <span>{project.title}</span>
+              <Icon name="arrow-up-right" size={18} />
+            </h3>
+            <p class="project-card__desc">{project.summary}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section studio-preview wrap" aria-labelledby="studio-title">
+    <div class="studio-grid">
+      <figure class="studio-image" data-reveal>
+        <img
+          src={studioImage.src}
+          srcset={studioImage.srcset}
+          sizes="(max-width: 900px) 100vw, 52vw"
+          width={studioImage.width}
+          height={studioImage.height}
+          alt="Natalia Afentoulidou standing in her studio beside paintings, timber and works in progress."
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption class="micro">
+          <span>The studio, Athens</span>
+          <span>Work in progress</span>
+        </figcaption>
+      </figure>
+
+      <div class="studio-copy" data-reveal style="--delay: 100ms">
+        <p class="eyebrow eyebrow--accent">About / 04</p>
+        <h2 class="studio-title" id="studio-title">
+          Paper, wood, discarded things. <em>All of it can hold an image.</em>
+        </h2>
+        <p>
+          Natalia Afentoulidou is an artist living and working in Athens. She holds an MFA
+          from Boston University and a BFA from the Athens School of Fine Arts, and has held
+          residencies at MacDowell and Yaddo.
+        </p>
+        <p>
+          Her work returns to the provisional structures that hold us: roofs, huts, rooms,
+          bodies and the lines drawn around them.
+        </p>
+        <p class="studio-facts micro">
+          <span>Athens, Greece</span>
+          <span>MFA, Boston University</span>
+          <span>MacDowell &amp; Yaddo</span>
+        </p>
+        <a class="text-link" href="/bio">
+          Read bio &amp; CV
+          <Icon name="arrow-up-right" size={13} />
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta" aria-labelledby="cta-title">
+    <div class="cta-inner wrap">
+      <div class="cta-top" data-reveal>
+        <p class="eyebrow">Contact / 05</p>
+        <h2 class="cta-title" id="cta-title">Let’s<br /><em>talk.</em></h2>
+      </div>
+      <div class="cta-copy" data-reveal style="--delay: 100ms">
+        <p>
+          For exhibitions, collaborations, commissions and studio visits — write to me.
+        </p>
+        <a class="cta-email" href={`mailto:${site.email}`}>{site.email}</a>
+        <p class="cta-meta micro">
+          <span>Athens, Greece</span>
+          <span>Working internationally</span>
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

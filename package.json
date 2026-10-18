@@ -1,0 +1,27 @@
+{
+  "name": "natalia-afentoulidou",
+  "version": "1.0.0",
+  "description": "The art of Natalia Afentoulidou — drawing, installation and mixed media.",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev --host 127.0.0.1",
+    "build": "astro build",
+    "preview": "astro preview --host 127.0.0.1",
+    "assets": "node scripts/prepare-assets.mjs && node scripts/prepare-site-assets.mjs",
+    "cv": "npm run build && node scripts/build-cv.mjs && python scripts/finalize-cv.py",
+    "audit": "node scripts/audit.mjs",
+    "deploy": "npm run build && firebase deploy --only hosting"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
+    "astro": "^7.4.0",
+    "sharp": "^0.35.5"
+  },
+  "devDependencies": {
+    "playwright-core": "^1.64.1"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  }
+}

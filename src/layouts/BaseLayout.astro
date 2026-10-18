@@ -1,0 +1,118 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Lightbox from '../components/Lightbox.astro';
+import { site } from '../data/projects';
+import '../styles/global.css';
+
+const {
+  title = 'Natalia Afentoulidou — Artist',
+  description = site.description,
+  image = '/images/og-default.jpg',
+  noindex = false,
+  bodyClass = '',
+} = Astro.props;
+
+const pageTitle = title.includes('Natalia Afentoulidou') ? title : `${title} — Natalia Afentoulidou`;
+const cleanPath = Astro.url.pathname.replace(/\/index\.html$/, '/').replace(/\.html$/, '') || '/';
+const canonical = new URL(cleanPath, Astro.site).href;
+const socialImage = new URL(image, Astro.site).href;
+
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: site.name,
+  url: site.url,
+  image: socialImage,
+  jobTitle: 'Artist',
+  description: site.description,
+  email: `mailto:${site.email}`,
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Athens',
+    addressCountry: 'GR',
+  },
+  alumniOf: [
+    { '@type': 'CollegeOrUniversity', name: 'Boston University' },
+    { '@type': 'CollegeOrUniversity', name: 'Athens School of Fine Arts' },
+  ],
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+    <meta name="author" content={site.name} />
+    <meta name="theme-color" content="#f3efe6" />
+    <meta name="color-scheme" content="light" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={socialImage} />
+    <meta property="og:image:alt" content="Natalia Afentoulidou — artist" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImage} />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <link rel="preload" href="/fonts/instrument-serif-regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/dm-sans-variable.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/ibm-plex-mono-400.woff2" as="font" type="font/woff2" crossorigin />
+
+    <script is:inline>
+      document.documentElement.classList.add('js');
+    </script>
+
+    <script type="application/ld+json" set:html={JSON.stringify(personSchema)}></script>
+  </head>
+
+  <body class={bodyClass} id="top">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <Header />
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+    <Footer />
+    <Lightbox />
+
+    <script is:inline>
+      (() => {
+        const elements = Array.from(document.querySelectorAll('[data-reveal]'));
+        if (!elements.length) return;
+
+        const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (reduced || !('IntersectionObserver' in window)) {
+          elements.forEach((element) => element.classList.add('is-visible'));
+          return;
+        }
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            });
+          },
+          { rootMargin: '0px 0px -6% 0px', threshold: 0.04 },
+        );
+
+        elements.forEach((element) => observer.observe(element));
+      })();
+    </script>
+  </body>
+</html>

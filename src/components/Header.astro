@@ -1,0 +1,146 @@
+---
+import SiteMark from './SiteMark.astro';
+import Icon from './Icon.astro';
+import { site } from '../data/projects';
+
+const path = Astro.url.pathname.replace(/\/+$/, '') || '/';
+
+const navItems = [
+  { label: 'Home', href: '/' },
+  { label: 'Bio', href: '/bio' },
+  { label: 'Work', href: '/work' },
+  { label: 'Projects', href: '/projects' },
+  { label: 'Contact', href: '/contact' },
+];
+
+const isActive = (href) => (href === '/' ? path === '/' : path === href || path.startsWith(`${href}/`));
+---
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="/" aria-label="Natalia Afentoulidou — home">
+      <SiteMark class="brand-mark" size={23} />
+      <span class="brand-name">Natalia Afentoulidou</span>
+      <span class="brand-sub">Artist</span>
+    </a>
+
+    <nav class="desktop-nav" aria-label="Primary">
+      <ul class="nav-list">
+        {navItems.map((item) => (
+          <li>
+            <a
+              class="nav-link"
+              href={item.href}
+              aria-current={isActive(item.href) ? 'page' : undefined}
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="header-right">
+      <p class="header-meta header-time">
+        <span class="dot" aria-hidden="true"></span>
+        <span>Athens, GR</span>
+      </p>
+      <button
+        class="menu-toggle"
+        type="button"
+        data-menu-toggle
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        aria-haspopup="dialog"
+      >
+        <span>Menu</span>
+        <span class="menu-toggle__icon" aria-hidden="true"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<dialog class="mobile-menu" id="mobile-menu" aria-label="Site menu" data-mobile-menu>
+  <div class="mobile-menu__inner">
+    <div class="mobile-menu__top">
+      <a class="brand" href="/" aria-label="Natalia Afentoulidou — home">
+        <SiteMark class="brand-mark" size={23} />
+        <span class="brand-name">Natalia Afentoulidou</span>
+      </a>
+      <button class="mobile-menu__close" type="button" data-menu-close autofocus>
+        <span>Close</span>
+        <Icon name="close" size={16} />
+      </button>
+    </div>
+
+    <nav class="mobile-menu__nav" aria-label="Mobile">
+      <ul>
+        {navItems.map((item, index) => (
+          <li>
+            <a
+              href={item.href}
+              aria-current={isActive(item.href) ? 'page' : undefined}
+            >
+              <span>{item.label}</span>
+              <span class="num">{String(index + 1).padStart(2, '0')}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="mobile-menu__foot">
+      <p class="eyebrow">Lives and works in Athens, Greece</p>
+      <a href={`mailto:${site.email}`}>{site.email}</a>
+      <p class="micro">Drawing · Installation · Mixed media</p>
+    </div>
+  </div>
+</dialog>
+
+<script>
+  const toggle = document.querySelector('[data-menu-toggle]');
+  const menu = document.querySelector('[data-mobile-menu]');
+  const closeButton = document.querySelector('[data-menu-close]');
+
+  if (toggle && menu && closeButton) {
+    const setState = (open) => {
+      toggle.setAttribute('aria-expanded', String(open));
+      document.body.classList.toggle('menu-open', open);
+    };
+
+    toggle.addEventListener('click', () => {
+      if (typeof menu.showModal === 'function') {
+        menu.showModal();
+      } else {
+        menu.setAttribute('open', '');
+      }
+      setState(true);
+    });
+
+    closeButton.addEventListener('click', () => menu.close());
+
+    menu.addEventListener('click', (event) => {
+      if (event.target === menu) menu.close();
+    });
+
+    menu.addEventListener('close', () => setState(false));
+
+    menu.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => menu.close());
+    });
+
+    const desktop = window.matchMedia('(min-width: 1021px)');
+    const closeOnDesktop = (event) => {
+      if (event.matches && menu.open) menu.close();
+    };
+
+    if (typeof desktop.addEventListener === 'function') {
+      desktop.addEventListener('change', closeOnDesktop);
+    }
+
+    window.addEventListener('pageshow', () => {
+      if (menu.open) menu.close();
+      setState(false);
+    });
+  }
+</script>

@@ -1,0 +1,142 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArtImage from '../../components/ArtImage.astro';
+import Icon from '../../components/Icon.astro';
+import SiteMark from '../../components/SiteMark.astro';
+import { projects } from '../../data/projects';
+import { lightboxAttrs } from '../../lib/lightbox';
+import images from '../../data/images.json';
+
+export function getStaticPaths() {
+  return projects.map((project, index) => ({
+    params: { slug: project.id },
+    props: {
+      project,
+      nextProject: projects[(index + 1) % projects.length],
+    },
+  }));
+}
+
+const { project, nextProject } = Astro.props;
+const coverWork = project.works[0];
+const blend = project.id === 'life-comes-in-circles';
+const total = projects.length;
+---
+
+<BaseLayout
+  title={project.title}
+  description={`${project.summary} A project by Natalia Afentoulidou.`}
+  image={`/images/og-${project.id}.jpg`}
+>
+  <div class="project-page" data-blend={String(blend)}>
+    <header class="project-head wrap">
+      <div class="project-head__bar">
+        <a class="text-link" href="/projects">All projects <Icon name="arrow-up-right" size={12} /></a>
+        <p class="eyebrow">Project {project.number} / {String(total).padStart(2, '0')}</p>
+      </div>
+
+      <div class="project-head__grid">
+        <div class="project-head__copy">
+          <p class="eyebrow eyebrow--accent" style="margin-bottom: 1.3rem">
+            {project.category}{project.year ? ` · ${project.year}` : ''}
+          </p>
+          <h1 class="project-head__title">{project.title}</h1>
+          <p class="project-head__tagline">{project.tagline}</p>
+        </div>
+
+        <figure class="project-head__cover">
+          <ArtImage
+            imageKey={project.cover}
+            alt={coverWork.alt}
+            sizes="(max-width: 900px) 72vw, 31vw"
+            loading="eager"
+            fetchpriority="high"
+          />
+          <figcaption class="micro">
+            <span>{coverWork.title}</span>
+            <span>{coverWork.medium}</span>
+          </figcaption>
+        </figure>
+      </div>
+    </header>
+
+    <section class="project-summary wrap" aria-label="Project overview">
+      <p class="project-summary__text">{project.summary}</p>
+      <dl class="project-summary__facts">
+        {project.facts.map(([label, value]) => (
+          <div class="fact">
+            <dt>{label}</dt>
+            <dd>{value}</dd>
+          </div>
+        ))}
+      </dl>
+    </section>
+
+    <section class="project-narrative wrap" aria-labelledby="project-about-title">
+      <aside class="project-narrative__aside">
+        <p class="eyebrow" id="project-about-title">About the project</p>
+      </aside>
+      <div class="project-narrative__body">
+        {project.intro.map((paragraph) => <p set:html={paragraph} />)}
+      </div>
+      <div class="project-narrative__mark" aria-hidden="true">
+        <SiteMark size={110} />
+      </div>
+    </section>
+
+    <section class="project-works wrap" id="works" aria-labelledby="project-works-title">
+      <div class="project-works__head">
+        <h2 class="project-works__title" id="project-works-title">Works <span class="micro">({project.works.length})</span></h2>
+        <a class="text-link" href="/work">Full work index <Icon name="arrow-up-right" size={13} /></a>
+      </div>
+
+      <div class="project-work-grid">
+        {project.works.map((work, index) => (
+          <article class="project-work" id={work.id} data-blend={String(blend)} data-reveal>
+            <a
+              class="work-item__link"
+              {...lightboxAttrs(work, project, images[work.image].fallback)}
+            >
+              <div class="work-item__media">
+                <ArtImage
+                  imageKey={work.image}
+                  alt={work.alt}
+                  sizes="(max-width: 900px) 100vw, 44vw"
+                  loading={index < 2 ? 'eager' : 'lazy'}
+                />
+                <span class="work-item__view">View</span>
+              </div>
+            </a>
+            <div class="project-work__caption">
+              <div>
+                <h3>
+                  {work.title}
+                  {work.note && <em class="work-view-note"> — {work.note}</em>}
+                </h3>
+                <p class="meta micro">
+                  {[work.medium, work.dimensions, work.year].filter(Boolean).join(' · ')}
+                </p>
+              </div>
+              <p class="index micro">{String(index + 1).padStart(2, '0')}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <nav class="project-next" aria-label="Next project">
+      <div class="wrap">
+        <a class="project-next__link" href={`/projects/${nextProject.id}`}>
+          <div class="project-next__meta">
+            <p class="eyebrow">Next project / {nextProject.number}</p>
+            <p class="micro">{nextProject.category}</p>
+          </div>
+          <h2 class="project-next__title">{nextProject.title}</h2>
+          <span class="project-next__arrow" aria-hidden="true">
+            <Icon name="arrow-up-right" size={22} />
+          </span>
+        </a>
+      </div>
+    </nav>
+  </div>
+</BaseLayout>

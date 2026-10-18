@@ -1,0 +1,79 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArtImage from '../../components/ArtImage.astro';
+import Icon from '../../components/Icon.astro';
+import { projects } from '../../data/projects';
+---
+
+<BaseLayout
+  title="Projects"
+  description="Three projects by Natalia Afentoulidou: Life comes in circles, Your Roof, My Hut and Burn Wisdom Burn."
+>
+  <header class="page-head wrap">
+    <div class="page-head__bar">
+      <p class="eyebrow">Projects / 01—03</p>
+      <p class="page-head__count">Three bodies of work</p>
+    </div>
+    <h1>Projects<span class="accent">.</span></h1>
+    <div class="page-head__deck">
+      <p class="lead">
+        Three ways of building a world: a room that behaves like a drawing, a shelter made
+        from what is left over, and a body that listens.
+      </p>
+      <p class="note">
+        Each project begins with a different material condition — paper, discarded matter,
+        or a whole room — and follows it until the boundaries between drawing and space begin
+        to soften.
+      </p>
+    </div>
+  </header>
+
+  <div class="projects-page wrap">
+    <section class="projects-intro" aria-label="Introduction">
+      <div class="projects-intro__grid">
+        <p class="eyebrow projects-intro__aside">A practice<br />in three chapters</p>
+        <p class="projects-intro__copy" data-reveal>
+          The work keeps returning to the same question: what holds a thing together? A line,
+          a wall, a roof, a title, another body. Each project tries a different answer, then
+          lets the answer <em>fall apart</em> and begin again.
+        </p>
+      </div>
+    </section>
+
+    {projects.map((project, index) => {
+      const coverWork = project.works[0];
+      return (
+        <article class="project-entry">
+          <div
+            class={`project-entry__media${project.id === 'life-comes-in-circles' ? ' project-entry__media--paper' : ''}`}
+            data-reveal
+          >
+            <a href={`/projects/${project.id}`} aria-label={`View project ${project.title}`}>
+              <ArtImage
+                imageKey={project.cover}
+                alt={coverWork.alt}
+                sizes="(max-width: 900px) 100vw, 58vw"
+              />
+            </a>
+          </div>
+
+          <div class="project-entry__copy" data-reveal style={`--delay: ${index % 2 === 0 ? 90 : 40}ms`}>
+            <div class="project-entry__meta micro">
+              <span>Project {project.number}</span>
+              <span>{project.category}</span>
+            </div>
+            <h2 class="project-entry__title">
+              <a href={`/projects/${project.id}`}>{project.title}</a>
+            </h2>
+            <p class="project-entry__tagline">{project.tagline}</p>
+            <p class="project-entry__desc">{project.summary}</p>
+            <a class="text-link project-entry__link" href={`/projects/${project.id}`}>
+              Enter project
+              <Icon name="arrow-up-right" size={13} />
+            </a>
+          </div>
+        </article>
+      );
+    })}
+  </div>
+</BaseLayout>

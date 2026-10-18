@@ -1,0 +1,113 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/Icon.astro';
+import { site } from '../data/projects';
+---
+
+<BaseLayout
+  title="Contact"
+  description="Contact Natalia Afentoulidou for exhibitions, collaborations, commissions and studio visits."
+>
+  <section class="contact-page" aria-labelledby="contact-title">
+  <div class="contact-hero wrap">
+    <div class="contact-top">
+      <p class="eyebrow">Contact / 05</p>
+      <p class="eyebrow contact-top__right">Studio<br />Athens, Greece</p>
+    </div>
+
+    <h1 class="contact-title" id="contact-title">Let’s<br /><em>talk.</em></h1>
+
+    <div class="contact-body">
+      <div class="contact-copy">
+        <p>
+          For exhibitions, collaborations, commissions and studio visits — write to me. I
+          read every message.
+        </p>
+        <p class="micro contact-invite">
+          Please include a little about the project, timeline and where you are writing from.
+        </p>
+      </div>
+
+      <div class="contact-mail">
+        <p class="eyebrow" style="margin-bottom: 0.9rem">Write to me</p>
+        <a href={`mailto:${site.email}`}>{site.email}</a>
+        <br />
+        <button class="copy-mail" type="button" data-copy-mail data-email={site.email}>
+          <Icon name="copy" size={13} />
+          <span data-copy-label aria-live="polite">Copy email</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="contact-foot">
+      <p class="micro">
+        Based in Athens, Greece. Working internationally.<br />
+        For press images and further materials, please get in touch.
+      </p>
+      <p class="contact-clock micro" data-athens-clock>Athens, Greece</p>
+    </div>
+  </div>
+</section>
+
+  <script>
+    const clock = document.querySelector('[data-athens-clock]');
+
+    if (clock) {
+      const updateClock = () => {
+        const time = new Intl.DateTimeFormat('en-GB', {
+          timeZone: 'Europe/Athens',
+          hour: '2-digit',
+          minute: '2-digit',
+          hour12: false,
+        }).format(new Date());
+        clock.textContent = `Athens, ${time}`;
+      };
+
+      updateClock();
+      window.setInterval(updateClock, 30000);
+    }
+
+    const copyButton = document.querySelector('[data-copy-mail]');
+
+    if (copyButton) {
+      const label = copyButton.querySelector('[data-copy-label]');
+      const email = copyButton.dataset.email;
+
+      const fallbackCopy = () => {
+        const input = document.createElement('textarea');
+        input.value = email;
+        input.setAttribute('readonly', '');
+        input.style.position = 'fixed';
+        input.style.opacity = '0';
+        document.body.appendChild(input);
+        input.select();
+        document.execCommand('copy');
+        input.remove();
+      };
+
+      copyButton.addEventListener('click', async () => {
+        if (!email) return;
+
+        try {
+          if (navigator.clipboard?.writeText) {
+            await navigator.clipboard.writeText(email);
+          } else {
+            fallbackCopy();
+          }
+          if (label) label.textContent = 'Copied';
+          copyButton.classList.add('is-copied');
+          window.setTimeout(() => {
+            if (label) label.textContent = 'Copy email';
+            copyButton.classList.remove('is-copied');
+          }, 2200);
+        } catch {
+          fallbackCopy();
+          if (label) label.textContent = 'Copied';
+          window.setTimeout(() => {
+            if (label) label.textContent = 'Copy email';
+          }, 2200);
+        }
+      });
+    }
+  </script>
+</BaseLayout>

@@ -1,0 +1,296 @@
+---
+import { cvSections } from '../data/cv';
+import { projects, site } from '../data/projects';
+import '../styles/cv.css';
+
+const section = (id) => cvSections.find((item) => item.id === id);
+const education = section('education');
+const shows = section('selected-shows');
+const teaching = section('teaching');
+const residencies = section('residencies');
+const awards = section('awards');
+const illustrations = section('illustrations');
+const press = section('press');
+
+const showColumns = [shows.entries.slice(0, 9), shows.entries.slice(9)];
+const awardColumns = [awards.entries.slice(0, 5), awards.entries.slice(5)];
+const projectList = projects;
+const pdfPath = '/cv/Natalia-Afentoulidou-CV.pdf';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Natalia Afentoulidou - Curriculum Vitae</title>
+    <meta name="author" content="Natalia Afentoulidou" />
+    <meta
+      name="description"
+      content="Curriculum Vitae of Natalia Afentoulidou: education, selected exhibitions, residencies, awards, illustrations and press."
+    />
+    <meta name="theme-color" content="#0e0e0d" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preload" href="/fonts/instrument-serif-regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/dm-sans-variable.woff2" as="font" type="font/woff2" crossorigin />
+  </head>
+
+  <body>
+    <header class="cv-toolbar">
+      <div class="cv-toolbar__inner">
+        <a class="cv-brand" href="/">
+          Natalia Afentoulidou <span>Curriculum Vitae</span>
+        </a>
+        <div class="cv-toolbar__actions">
+          <button class="cv-tool" type="button" data-print>Print</button>
+          <a class="cv-tool cv-tool--primary" href={pdfPath} download>Download PDF</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="cv-stage">
+      <div class="cv-stage__meta">
+        <span>A4 / 3 pages</span>
+        <span>Designed for print &amp; screen</span>
+      </div>
+
+      <div class="cv-pages">
+        <div class="cv-sheet">
+          <article class="cv-page cv-cover" aria-labelledby="cv-cover-title">
+            <header class="cv-cover__top cv-mono">
+              <p>Natalia Afentoulidou</p>
+              <p>Curriculum Vitae / 2026</p>
+            </header>
+
+            <div class="cv-cover__orbit" aria-hidden="true"></div>
+
+            <h1 id="cv-cover-title">
+              <span>Natalia</span>
+              <em>Afentoulidou</em>
+            </h1>
+
+            <div class="cv-cover__summary">
+              <p class="cv-cover__lede">
+                An artist of rooms, drawings and the <em>delicate architecture</em> between them.
+              </p>
+
+              <dl class="cv-cover__facts">
+                <div class="cv-cover__fact">
+                  <dt class="cv-mono">Lives / works</dt>
+                  <dd>Athens, Greece</dd>
+                </div>
+                <div class="cv-cover__fact">
+                  <dt class="cv-mono">Email</dt>
+                  <dd><a href={`mailto:${site.email}`}>{site.email}</a></dd>
+                </div>
+                <div class="cv-cover__fact">
+                  <dt class="cv-mono">Website</dt>
+                  <dd><a href={site.url}>nataliaafentoulidou.com</a></dd>
+                </div>
+              </dl>
+            </div>
+
+            <p class="cv-cover__statement">
+              Working between ink on paper and large-scale installation, Natalia builds dense
+              visual ecosystems in which bodies, shelters and other living things become
+              entangled. Her forms repeat, mutate and accumulate — never quite settling into a
+              single body, room or story. Discarded materials and photocopies carry the marks
+              of use, reuse and refusal.
+            </p>
+
+            <figure class="cv-cover__figure">
+              <img
+                src="/images/works/2026-02-1141.webp"
+                alt="Detail of Forever young, an ink and pencil drawing of dark dotted forms tangled around pale looping limbs."
+                width="1141"
+                height="801"
+              />
+              <figcaption class="cv-mono">
+                <span>Forever young (detail), 2026</span>
+                <span>Ink and pencil on paper</span>
+              </figcaption>
+            </figure>
+
+            <footer class="cv-cover__foot cv-mono">
+              <p>Selected works &amp; projects</p>
+              <p>01 / 03</p>
+            </footer>
+          </article>
+        </div>
+
+        <div class="cv-sheet">
+          <article class="cv-page" aria-labelledby="cv-shows-title">
+            <div class="cv-page-inner">
+              <header class="cv-running cv-mono">
+                <span>Natalia Afentoulidou</span>
+                <span>Curriculum Vitae</span>
+                <span>02 / 03</span>
+              </header>
+
+              <div class="cv-title-row">
+                <span class="cv-section-number">02</span>
+                <h2 id="cv-shows-title">Selected Shows</h2>
+                <span class="cv-count cv-mono">17 entries / 2005—2018</span>
+              </div>
+
+              <div class="cv-page-body">
+                <div class="cv-shows">
+                  {showColumns.map((column) => (
+                    <div class="cv-shows__column">
+                      {column.map((entry) => (
+                        <div class="cv-show">
+                          <span class="cv-show__year">{entry.year}</span>
+                          <div>
+                            <p class="cv-show__title">
+                              {entry.title}
+                              {entry.solo && <span class="cv-solo">Solo</span>}
+                            </p>
+                            <p class="cv-show__venue">{entry.venue}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+
+                <div class="cv-minor-grid">
+                  {[education, teaching, residencies].map((block) => (
+                    <section class="cv-minor">
+                      <h3>{block.title}</h3>
+                      {block.entries.map((entry) => (
+                        <div class="cv-minor__entry">
+                          <span class="cv-minor__year">{entry.year}</span>
+                          <span set:html={entry.text} />
+                        </div>
+                      ))}
+                    </section>
+                  ))}
+                </div>
+
+                <footer class="cv-page-foot cv-mono">
+                  <span><a href={`mailto:${site.email}`}>{site.email}</a></span>
+                  <span><a href={site.url}>nataliaafentoulidou.com</a></span>
+                  <span>Page 02</span>
+                </footer>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="cv-sheet">
+          <article class="cv-page cv-page--three" aria-labelledby="cv-awards-title">
+            <div class="cv-page-inner">
+              <header class="cv-running cv-mono">
+                <span>Natalia Afentoulidou</span>
+                <span>Curriculum Vitae</span>
+                <span>03 / 03</span>
+              </header>
+
+              <div class="cv-title-row">
+                <span class="cv-section-number">03</span>
+                <h2 id="cv-awards-title">Awards &amp; Grants</h2>
+                <span class="cv-count cv-mono">10 entries / 2008—2012</span>
+              </div>
+
+              <div class="cv-awards">
+                {awardColumns.map((column) => (
+                  <div class="cv-awards__column">
+                    {column.map((entry) => (
+                      <div class="cv-award">
+                        <span class="cv-award__year">{entry.year}</span>
+                        <span set:html={entry.text} />
+                      </div>
+                    ))}
+                  </div>
+                ))}
+              </div>
+
+              <div class="cv-panels">
+                <section class="cv-panel">
+                  <h3>Illustrations</h3>
+                  {illustrations.entries.map((entry) => (
+                    <p class="cv-panel__entry">
+                      <span class="cv-panel__year">{entry.year}</span>
+                      <span set:html={entry.text} />
+                    </p>
+                  ))}
+                </section>
+
+                <section class="cv-panel">
+                  <h3>Press</h3>
+                  {press.entries.map((entry) => (
+                    <p class="cv-panel__entry">
+                      <span class="cv-panel__year">{entry.year}</span>
+                      <span>
+                        {entry.text} —{' '}
+                        <a href={entry.href} target="_blank" rel="noopener">
+                          {entry.publication} ↗
+                        </a>
+                      </span>
+                    </p>
+                  ))}
+                </section>
+              </div>
+
+              <figure class="cv-interlude">
+                <img
+                  src="/images/works/2026-10-1141.webp"
+                  alt="Detail of Ultimate form of activism, a black-and-white ink drawing of a dotted sphere and a patterned disc in a tangle of pale forms."
+                  width="1141"
+                  height="788"
+                />
+                <figcaption class="cv-mono">
+                  <span>Ultimate form of activism (detail), 2026</span>
+                  <span>Ink and pencil on paper</span>
+                </figcaption>
+              </figure>
+
+              <section class="cv-projects" aria-labelledby="cv-projects-title">
+                <div class="cv-projects__head">
+                  <span id="cv-projects-title">Selected Projects</span>
+                  <span>Three bodies of work</span>
+                </div>
+                <div class="cv-projects__list">
+                  {projectList.map((project) => (
+                    <div class="cv-project">
+                      <span class="cv-project__number">Project {project.number}</span>
+                      <h3>{project.title}</h3>
+                      <p>{project.category}{project.year ? ` / ${project.year}` : ''}</p>
+                    </div>
+                  ))}
+                </div>
+                <footer class="cv-projects__foot">
+                  <span><a href={`mailto:${site.email}`}>{site.email}</a></span>
+                  <span><a href={site.url}>nataliaafentoulidou.com</a></span>
+                  <span>Page 03</span>
+                </footer>
+              </section>
+            </div>
+          </article>
+        </div>
+      </div>
+    </main>
+
+    <script is:inline>
+      (() => {
+        const root = document.documentElement;
+        const stage = document.querySelector('.cv-pages');
+        const printButton = document.querySelector('[data-print]');
+
+        if (stage) {
+          const pageWidth = (210 / 25.4) * 96;
+          const fit = () => {
+            const available = Math.min(window.innerWidth - 40, pageWidth);
+            const scale = Math.max(0.34, Math.min(1, available / pageWidth));
+            root.style.setProperty('--cv-scale', String(scale));
+          };
+
+          fit();
+          window.addEventListener('resize', fit);
+        }
+
+        printButton?.addEventListener('click', () => window.print());
+      })();
+    </script>
+  </body>
+</html>

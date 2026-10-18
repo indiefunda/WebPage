@@ -1,0 +1,162 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/Icon.astro';
+import { cvSections } from '../data/cv';
+
+const studioImage = {
+  src: '/images/studio-1600.jpg',
+  srcset: '/images/studio-960.jpg 960w, /images/studio-1600.jpg 1600w',
+  width: 1600,
+  height: 1071,
+};
+---
+
+<BaseLayout
+  title="Bio"
+  description="Natalia Afentoulidou is an artist based in Athens, Greece. Biography, selected exhibitions, residencies and full CV."
+>
+  <header class="page-head wrap">
+    <div class="page-head__bar">
+      <p class="eyebrow">Bio / CV</p>
+      <p class="page-head__count">Athens, Greece</p>
+    </div>
+    <h1>Natalia<br /><em>Afentoulidou</em></h1>
+    <div class="page-head__deck">
+      <p class="lead">An artist of rooms, drawings and the delicate architecture between them.</p>
+      <p class="note">
+        Based in Athens, trained in Athens and Boston.
+      </p>
+    </div>
+  </header>
+
+  <section class="bio-intro wrap" aria-labelledby="bio-intro-title">
+    <div class="bio-grid">
+      <figure class="bio-portrait" data-reveal>
+        <img
+          src={studioImage.src}
+          srcset={studioImage.srcset}
+          sizes="(max-width: 900px) 100vw, 52vw"
+          width={studioImage.width}
+          height={studioImage.height}
+          alt="Natalia Afentoulidou standing in her studio beside paintings, timber and works in progress."
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+        />
+        <figcaption class="micro">
+          <span>The studio, Athens</span>
+          <span>Work in progress</span>
+        </figcaption>
+      </figure>
+
+      <div class="bio-copy" data-reveal style="--delay: 90ms">
+        <h2 class="lead" id="bio-intro-title">
+          Paper, wood, discarded things. <em>All of it can hold an image.</em>
+        </h2>
+        <p>
+          Natalia Afentoulidou is an artist working across drawing, installation and mixed
+          media. She holds an MFA from Boston University and a BFA from the Athens School of
+          Fine Arts, and has held residencies at MacDowell and Yaddo.
+        </p>
+        <p>
+          Her practice moves between paper and room. Dense, hand-drawn ecosystems become
+          walls, objects and provisional architectures; discarded materials and photocopies
+          carry the marks of use, reuse and refusal. Repetition is central: forms return
+          across works, changing scale and company, as if a thought could be walked around.
+        </p>
+        <p>
+          Her work has been presented in solo and group exhibitions in Greece and the United
+          States, including at the Stone Gallery at Boston University, Anna Maria College,
+          Geoffrey Young Gallery and the Cultural Center of Kifissia.
+        </p>
+        <p class="bio-facts micro">
+          <span>Drawing</span>
+          <span>Installation</span>
+          <span>Mixed media</span>
+          <span>Athens, Greece</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="bio-cv wrap" id="cv" aria-labelledby="cv-title">
+    <div class="cv-head">
+      <div>
+        <p class="eyebrow eyebrow--accent" style="margin-bottom: 1rem">Selected CV</p>
+        <h2 id="cv-title">Curriculum<br /><em>Vitae</em></h2>
+      </div>
+      <div class="cv-head__actions">
+        <a class="text-link" href="/cv">
+          View CV
+          <Icon name="arrow-up-right" size={13} />
+        </a>
+        <a
+          class="text-link"
+          href="/cv/Natalia-Afentoulidou-CV.pdf"
+          target="_blank"
+          rel="noopener"
+        >
+          Download CV
+          <Icon name="download" size={13} />
+        </a>
+      </div>
+    </div>
+
+    <div class="cv-layout">
+      <aside class="cv-nav" aria-label="CV sections">
+        <p class="eyebrow">Sections</p>
+        <ul>
+          {cvSections.map((section) => (
+            <li><a href={`#${section.id}`}>{section.title}</a></li>
+          ))}
+        </ul>
+      </aside>
+
+      <div class="cv-content">
+        {cvSections.map((section) => (
+          <section class="cv-section" id={section.id} aria-labelledby={`${section.id}-title`}>
+            <div class="cv-section__head">
+              <h3 id={`${section.id}-title`}>{section.title}</h3>
+              <span class="micro">{String(section.entries.length).padStart(2, '0')}</span>
+            </div>
+
+            <div class="cv-entries">
+              {section.entries.map((entry) => (
+                <div class="cv-entry">
+                  <p class="cv-year">{entry.year}</p>
+                  <div class="cv-text">
+                    {entry.title && (
+                      <>
+                        <span>{entry.title}</span>
+                        {entry.solo && <span class="solo-tag">Solo</span>}
+                        <span> — {entry.venue}</span>
+                      </>
+                    )}
+                    {entry.publication ? (
+                      <>
+                        <span>{entry.text} — </span>
+                        <a href={entry.href} target="_blank" rel="noopener">
+                          {entry.publication}
+                        </a>
+                      </>
+                    ) : (
+                      entry.text && <span set:html={entry.text} />
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        ))}
+      </div>
+    </div>
+
+    <div class="cv-foot">
+      <p class="micro">Full CV available as a PDF. For press images and further materials, please get in touch.</p>
+      <a class="text-link" href="/contact">
+        Contact
+        <Icon name="arrow-up-right" size={13} />
+      </a>
+    </div>
+  </section>
+</BaseLayout>

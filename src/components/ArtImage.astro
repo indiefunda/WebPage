@@ -1,0 +1,34 @@
+---
+import images from '../data/images.json';
+
+const {
+  imageKey,
+  alt,
+  sizes = '(max-width: 700px) 100vw, (max-width: 1100px) 50vw, 33vw',
+  loading = 'lazy',
+  fetchpriority = 'auto',
+  class: className = '',
+} = Astro.props;
+
+const image = images[imageKey];
+
+if (!image) {
+  throw new Error(`Unknown artwork image: ${imageKey}`);
+}
+
+const srcset = image.sources.map((source) => `${source.path} ${source.width}w`).join(', ');
+---
+
+<img
+  src={image.fallback}
+  srcset={srcset}
+  sizes={sizes}
+  width={image.width}
+  height={image.height}
+  alt={alt}
+  class={className}
+  loading={loading}
+  fetchpriority={fetchpriority}
+  decoding="async"
+  draggable="false"
+/>

@@ -1,0 +1,21 @@
+{
+  "name": "Natalia Afentoulidou — Artist",
+  "short_name": "N. Afentoulidou",
+  "description": "Drawing, installation and mixed media by Natalia Afentoulidou.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f3efe6",
+  "theme_color": "#f3efe6",
+  "icons": [
+    {
+      "src": "/images/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
