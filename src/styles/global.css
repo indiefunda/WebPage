@@ -2810,7 +2810,7 @@ strong {
 
 .project-narrative__quote {
   max-width: 22ch;
-  margin: 2.5rem 0 0;
+  margin: 2.5rem 0 1.8rem;
   padding: 1.25rem 0 1.35rem;
   border-top: 1px solid var(--accent);
   border-bottom: 1px solid var(--line);
