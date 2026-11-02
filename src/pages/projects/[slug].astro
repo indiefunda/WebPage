@@ -20,6 +20,7 @@ export function getStaticPaths() {
 const { project, nextProject } = Astro.props;
 const coverWork = project.works[0];
 const blend = project.id === 'life-comes-in-circles';
+const isStatement = project.id === 'life-comes-in-circles';
 const total = projects.length;
 ---
 
@@ -72,12 +73,30 @@ const total = projects.length;
       </dl>
     </section>
 
-    <section class="project-narrative wrap" aria-labelledby="project-about-title">
+    <section
+      class:list={['project-narrative', 'wrap', isStatement && 'project-narrative--statement']}
+      aria-labelledby="project-about-title"
+    >
       <aside class="project-narrative__aside">
-        <p class="eyebrow" id="project-about-title">About the project</p>
+        <p class="eyebrow" id="project-about-title">
+          {isStatement ? 'Exhibition text' : 'About the project'}
+        </p>
+        {isStatement && <p class="project-narrative__meta micro">Life Comes in Circles · 2026</p>}
       </aside>
       <div class="project-narrative__body">
-        {project.intro.map((paragraph) => <p set:html={paragraph} />)}
+        {project.intro.map((paragraph, index) => (
+          <>
+            <p
+              class={isStatement && index === 0 ? 'project-narrative__lede' : undefined}
+              set:html={paragraph}
+            />
+            {isStatement && index === 3 && project.statementQuote && (
+              <blockquote class="project-narrative__quote">
+                {project.statementQuote}
+              </blockquote>
+            )}
+          </>
+        ))}
       </div>
       <div class="project-narrative__mark" aria-hidden="true">
         <SiteMark size={110} />

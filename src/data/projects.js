@@ -30,9 +30,13 @@ export const projects = [
       ['Format', 'Works on paper'],
     ],
     intro: [
-      'Across thirteen works on paper, Natalia Afentoulidou treats listening as a physical event. Circles open inside circles; ink and pencil accumulate into soft, porous architectures — part ear, part cell, part speech — that seem to be opening and closing at once.',
-      'Dots, hatching and small perforations turn the surface into a membrane. Nothing is sealed. The title is there in the forms themselves: openings inside openings, lines that return, a body that keeps beginning again. The titles move through the whole vocabulary of intimacy: <em>I hear you</em>, <em>You hear me</em>, <em>Just leave the door open</em>, <em>Together we thrive</em>. What emerges is less a set of discrete objects than a conversation that keeps changing shape.',
+      'The exhibition <em>Life Comes in Circles</em> brings together works that revolve around an artistic practice grounded in the circle and the possibilities of repetition.',
+      'The process begins with the minimal. The circle, also a zero-form, becomes the starting point and the structure of an entire visual world. Its repetition shifts the focus from the individual element to the relationships between elements: rhythm, density, distance, and accumulation. The persistence of a single unit does not lead to sameness, but to difference: a subtle shift, a deviation, a new possibility, a dynamic relationship is introduced.',
+      'This systematic practice is connected to an exploration of the boundaries between memory and imagination. Observation is not a record of a given world, but a point of departure for the creation of another. References to the organic world and everyday objects are transformed into unstable forms and hypothetical places, where the familiar acquires a parallel, often unpredictable, version of itself.',
+      'These forms retain an ambiguous presence. Humour coexists with the absurd and a subtle sense of unease, while the recognisability of individual elements remains constantly open to question. The image thus functions as a field of transition, where memory, association, and imagination contribute equally to the shaping of perception.',
+      'In this sense, drawing takes on the character of an investigative process. Repetition is not merely a formal choice, but a reference to the perpetual pursuit of knowledge. Ultimately, the circle evokes the continuous transformation of things through time. What returns is never entirely the same; it carries traces of what came before and anticipates what is yet to come.',
     ],
+    statementQuote: 'What returns is never entirely the same.',
     works: [
       {
         id: 'ih-01',
