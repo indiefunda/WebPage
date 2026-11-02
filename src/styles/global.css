@@ -381,6 +381,11 @@ strong {
     transform: none;
   }
 
+  .marquee__track {
+    animation-duration: 90s !important;
+    animation-iteration-count: infinite !important;
+  }
+
   ::view-transition-old(root),
   ::view-transition-new(root) {
     animation: none;
