@@ -13,6 +13,11 @@ export const cvSections = [
     title: 'Selected Shows',
     wide: true,
     entries: [
+      {
+        year: '2026',
+        title: 'Life comes in circles',
+        venue: 'Artworx — Isabela Frances — Maria Xanthako, Greece',
+      },
       { year: '2018', title: 'Be Still Life', venue: 'Geoffrey Young Gallery, Great Barrington, MA' },
       { year: '2017', title: 'Brave New Work', venue: 'Geoffrey Young Gallery, Great Barrington, MA' },
       { year: '2015', title: 'Strings and Rails Anyway', venue: 'Stone Gallery, Boston University, Boston, MA', solo: true },

@@ -20,12 +20,11 @@ export const projects = [
     year: '2026',
     tagline: 'A body that listens in circles.',
     summary:
-      'Thirteen works on paper in which ink and pencil build soft, porous architectures — part ear, part cell, part speech — and circles that keep opening into other circles.',
+      'Works on paper in which ink and pencil build soft, porous architectures — part ear, part cell, part speech — and circles that keep opening into other circles.',
     cover: '2026-03',
     theme: 'paper',
     facts: [
       ['Year', '2026'],
-      ['Works', '13'],
       ['Medium', 'Ink and pencil on paper'],
       ['Format', 'Works on paper'],
     ],

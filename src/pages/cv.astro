@@ -13,6 +13,11 @@ const illustrations = section('illustrations');
 const press = section('press');
 
 const showColumns = [shows.entries.slice(0, 9), shows.entries.slice(9)];
+const showYears = shows.entries
+  .map((entry) => Number.parseInt(entry.year, 10))
+  .filter((year) => Number.isFinite(year));
+const showRange = `${Math.min(...showYears)}—${Math.max(...showYears)}`;
+const showCount = shows.entries.length;
 const awardColumns = [awards.entries.slice(0, 5), awards.entries.slice(5)];
 const projectList = projects;
 const pdfPath = '/cv/Natalia-Afentoulidou-CV.pdf';
@@ -130,7 +135,7 @@ const pdfPath = '/cv/Natalia-Afentoulidou-CV.pdf';
               <div class="cv-title-row">
                 <span class="cv-section-number">02</span>
                 <h2 id="cv-shows-title">Selected Shows</h2>
-                <span class="cv-count cv-mono">17 entries / 2005—2018</span>
+                <span class="cv-count cv-mono">{showCount} entries / {showRange}</span>
               </div>
 
               <div class="cv-page-body">
