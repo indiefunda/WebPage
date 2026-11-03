@@ -173,7 +173,6 @@ export const projects = [
     cover: 'B-08',
     theme: 'ink',
     facts: [
-      ['Works', '8'],
       ['Medium', 'Installation, mixed media'],
       ['Materials', 'Cardboard, photocopies, acrylic, charcoal'],
       ['Format', 'Dimensions variable'],
@@ -274,7 +273,6 @@ export const projects = [
     cover: 'A-02',
     theme: 'ink',
     facts: [
-      ['Works', '6'],
       ['Medium', 'Installation, mixed media'],
       ['Materials', 'Monotypes, photocopies, wood, pastel'],
       ['Format', 'Dimensions variable'],

@@ -9,23 +9,22 @@ import images from '../data/images.json';
 const projectById = Object.fromEntries(projects.map((project) => [project.id, project]));
 
 const filters = [
-  { id: 'all', label: 'All works', count: allWorks.length },
+  { id: 'all', label: 'All works' },
   ...projects.map((project) => ({
     id: project.id,
     label: project.tabTitle,
-    count: project.works.length,
   })),
 ];
 ---
 
 <BaseLayout
   title="Work"
-  description="Selected works by Natalia Afentoulidou: 27 drawings, installations and mixed-media works across three projects."
+  description="Selected works by Natalia Afentoulidou across drawing, installation and mixed media."
 >
   <header class="page-head wrap">
     <div class="page-head__bar">
       <p class="eyebrow">Work / index</p>
-      <p class="page-head__count">27 works · 3 projects</p>
+      <p class="page-head__count">Selected works</p>
     </div>
 
     <h1 class="work-title">Work</h1>
@@ -36,7 +35,7 @@ const filters = [
         between the two.
       </p>
       <p class="note">
-        The index gathers every work in the studio archive. Installation views are shown
+        The index gathers selected works from the studio archive. Installation views are shown
         alongside the individual works they contain. Dimensions are listed as height × width,
         and height × width × depth for spatial works.
       </p>
@@ -53,10 +52,10 @@ const filters = [
           aria-pressed={index === 0 ? 'true' : 'false'}
           aria-controls="work-grid"
         >
-          {filter.label} <span aria-hidden="true">({filter.count})</span>
+          {filter.label}
         </button>
       ))}
-      <p class="filter-count micro" data-work-count aria-live="polite">27 works</p>
+      <p class="filter-count micro" data-work-count aria-live="polite">Showing 27 works</p>
     </div>
   </div>
 
@@ -157,7 +156,7 @@ const filters = [
       });
 
       if (count) {
-        count.textContent = `${visible} ${visible === 1 ? 'work' : 'works'}`;
+        count.textContent = `Showing ${visible} ${visible === 1 ? 'work' : 'works'}`;
       }
 
       if (empty) empty.hidden = visible !== 0;
