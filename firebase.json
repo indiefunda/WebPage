@@ -8,6 +8,43 @@
     ],
     "cleanUrls": true,
     "trailingSlash": false,
+    "redirects": [
+      {
+        "source": "/work",
+        "destination": "/works",
+        "type": 301
+      },
+      {
+        "source": "/work/**",
+        "destination": "/works",
+        "type": 301
+      },
+      {
+        "source": "/projects",
+        "destination": "/works",
+        "type": 301
+      },
+      {
+        "source": "/projects/life-comes-in-circles",
+        "destination": "/works/life-comes-in-circles",
+        "type": 301
+      },
+      {
+        "source": "/projects/your-roof-my-hut",
+        "destination": "/works/your-roof-my-hut",
+        "type": 301
+      },
+      {
+        "source": "/projects/burn-wisdom-burn",
+        "destination": "/works/burn-wisdom-burn",
+        "type": 301
+      },
+      {
+        "source": "/projects/**",
+        "destination": "/works/:splat",
+        "type": 301
+      }
+    ],
     "headers": [
       {
         "source": "**",

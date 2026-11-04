@@ -3,11 +3,10 @@ import { chromium } from 'playwright-core';
 const base = process.argv[2] || 'http://127.0.0.1:4321';
 const pages = [
   '/',
-  '/work',
-  '/projects',
-  '/projects/life-comes-in-circles',
-  '/projects/your-roof-my-hut',
-  '/projects/burn-wisdom-burn',
+  '/works',
+  '/works/life-comes-in-circles',
+  '/works/your-roof-my-hut',
+  '/works/burn-wisdom-burn',
   '/bio',
   '/cv',
   '/contact',

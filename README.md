@@ -2,7 +2,7 @@
 
 A new website for the Athens-based artist Natalia Afentoulidou: drawing, installation and mixed media.
 
-The site is built with Astro and ships as plain, fast, static HTML/CSS/JS. It is deliberately image-led, with an editorial exhibition-catalogue feel, and keeps the existing sections: **Home, Bio, Work, Projects, Contact**.
+The site is built with Astro and ships as plain, fast, static HTML/CSS/JS. It is deliberately image-led, with an editorial exhibition-catalogue feel, and keeps the sections: **Home, Bio, Works, Contact**.
 
 ## Run it locally
 
@@ -25,7 +25,7 @@ The production files are written to `dist/`. `netlify.toml` is included, so the 
 - Build command: `npm run build`
 - Publish directory: `dist`
 
-The same `dist/` folder works on Vercel, Cloudflare Pages, or any static host. The site uses clean URLs (`/work`, `/projects/life-comes-in-circles`), so the host should support pretty/extensionless URLs (Netlify and Vercel do by default).
+The same `dist/` folder works on Vercel, Cloudflare Pages, or any static host. The site uses clean URLs (`/works`, `/works/life-comes-in-circles`), so the host should support pretty/extensionless URLs (Netlify and Vercel do by default). Old `/work` and `/projects` URLs redirect to `/works`.
 
 ## Where to edit content
 
@@ -34,7 +34,7 @@ The same `dist/` folder works on Vercel, Cloudflare Pages, or any static host. T
 | Artist name, email, location, default social text | `src/data/projects.js` (`site`) |
 | Projects, artwork titles, materials, dimensions, alt text | `src/data/projects.js` |
 | CV, shows, awards, press links | `src/data/cv.js` |
-| Work page copy | `src/pages/work.astro` |
+| Works index copy | `src/pages/works/index.astro` |
 | Bio copy | `src/pages/bio.astro` |
 | Contact copy | `src/pages/contact.astro` |
 | Visual system, type, layout | `src/styles/global.css` |

@@ -5,6 +5,21 @@
 [build.environment]
   NODE_VERSION = "22"
 
+[[redirects]]
+  from = "/work"
+  to = "/works"
+  status = 301
+
+[[redirects]]
+  from = "/projects/*"
+  to = "/works/:splat"
+  status = 301
+
+[[redirects]]
+  from = "/projects"
+  to = "/works"
+  status = 301
+
 [[headers]]
   for = "/fonts/*"
   [headers.values]

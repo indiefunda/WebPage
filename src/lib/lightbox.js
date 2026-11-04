@@ -3,7 +3,7 @@ import images from '../data/images.json';
 export const formatMeta = (work) =>
   [work.medium, work.dimensions, work.year].filter(Boolean).join(' · ');
 
-export const lightboxAttrs = (work, project, href = `/work#${work.id}`) => {
+export const lightboxAttrs = (work, project, href = `/works#${work.id}`) => {
   const image = images[work.image];
 
   if (!image) {

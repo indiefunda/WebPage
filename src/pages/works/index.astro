@@ -6,15 +6,15 @@ import { projects } from '../../data/projects';
 ---
 
 <BaseLayout
-  title="Projects"
-  description="Three projects by Natalia Afentoulidou: Life comes in circles, Your Roof, My Hut and Burn Wisdom Burn."
+  title="Works"
+  description="Three bodies of work by Natalia Afentoulidou: Life comes in circles, Your Roof, My Hut and Burn Wisdom Burn."
 >
   <header class="page-head wrap">
     <div class="page-head__bar">
-      <p class="eyebrow">Projects / 01—03</p>
+      <p class="eyebrow">Works / 01—03</p>
       <p class="page-head__count">Three bodies of work</p>
     </div>
-    <h1>Projects<span class="accent">.</span></h1>
+    <h1>Works<span class="accent">.</span></h1>
     <div class="page-head__deck">
       <p class="lead">
         Three distinct bodies of work, each beginning from a different material condition:
@@ -47,7 +47,7 @@ import { projects } from '../../data/projects';
             class={`project-entry__media${project.id === 'life-comes-in-circles' ? ' project-entry__media--paper' : ''}`}
             data-reveal
           >
-            <a href={`/projects/${project.id}`} aria-label={`View project ${project.title}`}>
+            <a href={`/works/${project.id}`} aria-label={`View work ${project.title}`}>
               <ArtImage
                 imageKey={project.cover}
                 alt={coverWork.alt}
@@ -58,16 +58,16 @@ import { projects } from '../../data/projects';
 
           <div class="project-entry__copy" data-reveal style={`--delay: ${index % 2 === 0 ? 90 : 40}ms`}>
             <div class="project-entry__meta micro">
-              <span>Project {project.number}</span>
+              <span>Work {project.number}</span>
               <span>{project.category}</span>
             </div>
             <h2 class="project-entry__title">
-              <a href={`/projects/${project.id}`}>{project.title}</a>
+              <a href={`/works/${project.id}`}>{project.title}</a>
             </h2>
             <p class="project-entry__tagline">{project.tagline}</p>
             <p class="project-entry__desc">{project.summary}</p>
-            <a class="text-link project-entry__link" href={`/projects/${project.id}`}>
-              Enter project
+            <a class="text-link project-entry__link" href={`/works/${project.id}`}>
+              Enter work
               <Icon name="arrow-up-right" size={13} />
             </a>
           </div>

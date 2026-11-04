@@ -117,7 +117,7 @@ const pdfPath = '/cv/Natalia-Afentoulidou-CV.pdf';
             </figure>
 
             <footer class="cv-cover__foot cv-mono">
-              <p>Selected works &amp; projects</p>
+              <p>Selected works</p>
               <p>01 / 03</p>
             </footer>
           </article>
@@ -252,13 +252,13 @@ const pdfPath = '/cv/Natalia-Afentoulidou-CV.pdf';
 
               <section class="cv-projects" aria-labelledby="cv-projects-title">
                 <div class="cv-projects__head">
-                  <span id="cv-projects-title">Selected Projects</span>
+                  <span id="cv-projects-title">Selected Works</span>
                   <span>Three bodies of work</span>
                 </div>
                 <div class="cv-projects__list">
                   {projectList.map((project) => (
                     <div class="cv-project">
-                      <span class="cv-project__number">Project {project.number}</span>
+                      <span class="cv-project__number">Work {project.number}</span>
                       <h3>{project.title}</h3>
                       <p>{project.category}{project.year ? ` / ${project.year}` : ''}</p>
                     </div>

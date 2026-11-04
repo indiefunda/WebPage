@@ -26,14 +26,14 @@ const total = projects.length;
 
 <BaseLayout
   title={project.title}
-  description={`${project.summary} A project by Natalia Afentoulidou.`}
+  description={`${project.summary} A work by Natalia Afentoulidou.`}
   image={`/images/og-${project.id}.jpg`}
 >
   <div class="project-page" data-blend={String(blend)}>
     <header class="project-head wrap">
       <div class="project-head__bar">
-        <a class="text-link" href="/projects">All projects <Icon name="arrow-up-right" size={12} /></a>
-        <p class="eyebrow">Project {project.number} / {String(total).padStart(2, '0')}</p>
+        <a class="text-link" href="/works">All works <Icon name="arrow-up-right" size={12} /></a>
+        <p class="eyebrow">Work {project.number} / {String(total).padStart(2, '0')}</p>
       </div>
 
       <div class="project-head__grid">
@@ -61,7 +61,7 @@ const total = projects.length;
       </div>
     </header>
 
-    <section class="project-summary wrap" aria-label="Project overview">
+    <section class="project-summary wrap" aria-label="Work overview">
       <p class="project-summary__text">{project.summary}</p>
       <dl class="project-summary__facts">
         {project.facts.map(([label, value]) => (
@@ -79,7 +79,7 @@ const total = projects.length;
     >
       <aside class="project-narrative__aside">
         <p class="eyebrow" id="project-about-title">
-          {isStatement ? 'Exhibition text' : 'About the project'}
+          {isStatement ? 'Exhibition text' : 'About the work'}
         </p>
         {isStatement && <p class="project-narrative__meta micro">Life Comes in Circles · 2026</p>}
       </aside>
@@ -106,7 +106,6 @@ const total = projects.length;
     <section class="project-works wrap" id="works" aria-labelledby="project-works-title">
       <div class="project-works__head">
         <h2 class="project-works__title" id="project-works-title">Works</h2>
-        <a class="text-link" href="/work">Full work index <Icon name="arrow-up-right" size={13} /></a>
       </div>
 
       <div class="project-work-grid">
@@ -143,11 +142,11 @@ const total = projects.length;
       </div>
     </section>
 
-    <nav class="project-next" aria-label="Next project">
+    <nav class="project-next" aria-label="Next work">
       <div class="wrap">
-        <a class="project-next__link" href={`/projects/${nextProject.id}`}>
+        <a class="project-next__link" href={`/works/${nextProject.id}`}>
           <div class="project-next__meta">
-            <p class="eyebrow">Next project / {nextProject.number}</p>
+            <p class="eyebrow">Next work / {nextProject.number}</p>
             <p class="micro">{nextProject.category}</p>
           </div>
           <h2 class="project-next__title">{nextProject.title}</h2>
