@@ -34,6 +34,17 @@ const links = [
         <h2>Contact</h2>
         <p>For exhibitions, collaborations, commissions and studio visits.</p>
         <a class="footer-mail" href={`mailto:${site.email}`}>{site.email}</a>
+        <a
+          class="footer-social"
+          href={site.instagram}
+          target="_blank"
+          rel="me noopener"
+          aria-label={`${site.name} on Instagram (opens in a new tab)`}
+        >
+          <span>Instagram</span>
+          <span class="footer-social__handle">{site.instagramHandle}</span>
+          <Icon name="arrow-up-right" size={12} />
+        </a>
       </div>
     </div>
 

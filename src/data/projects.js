@@ -3,6 +3,8 @@ export const site = {
   role: 'Artist',
   location: 'Athens, Greece',
   email: 'nafentoulidou@gmail.com',
+  instagram: 'https://www.instagram.com/nataliaafentoulidou/',
+  instagramHandle: '@nataliaafentoulidou',
   description:
     'Natalia Afentoulidou is an artist based in Athens, Greece, working across drawing, installation and mixed media.',
   url: 'https://nataliaafentoulidou.com',

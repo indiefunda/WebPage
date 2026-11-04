@@ -2034,6 +2034,41 @@ strong {
   border-color: var(--lime);
 }
 
+.footer-social {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin-top: 1.35rem;
+  padding-top: 0.7rem;
+  border-top: 1px solid rgba(243, 239, 230, 0.18);
+  color: rgba(243, 239, 230, 0.82);
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: color 0.25s var(--ease);
+}
+
+.footer-social__handle {
+  color: rgba(243, 239, 230, 0.48);
+  letter-spacing: 0.03em;
+  text-transform: none;
+}
+
+.footer-social svg {
+  color: var(--accent);
+  transition: transform 0.25s var(--ease);
+}
+
+.footer-social:hover {
+  color: var(--lime);
+}
+
+.footer-social:hover svg {
+  transform: translate(2px, -2px);
+}
+
 .footer-bottom {
   display: flex;
   align-items: center;
@@ -3451,7 +3486,7 @@ strong {
   max-width: 100%;
 }
 
-.contact-mail a {
+.contact-mail a:not(.contact-instagram) {
   display: inline-block;
   max-width: 100%;
   font-family: var(--serif);
@@ -3464,7 +3499,7 @@ strong {
   transition: opacity 0.25s var(--ease);
 }
 
-.contact-mail a:hover {
+.contact-mail a:not(.contact-instagram):hover {
   opacity: 0.62;
 }
 
@@ -3489,6 +3524,46 @@ strong {
 .copy-mail.is-copied {
   background: var(--ink);
   color: var(--accent);
+}
+
+.contact-instagram {
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin-top: 1.35rem;
+  padding-top: 0.7rem;
+  border-top: 1px solid rgba(17, 17, 15, 0.25);
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: color 0.25s var(--ease);
+}
+
+.contact-instagram__handle {
+  color: rgba(17, 17, 15, 0.62);
+  letter-spacing: 0.03em;
+  text-transform: none;
+}
+
+.contact-instagram svg {
+  color: currentColor;
+  transition: transform 0.25s var(--ease);
+}
+
+.contact-instagram:hover {
+  color: var(--ink);
+}
+
+.contact-instagram:hover .contact-instagram__handle {
+  color: var(--ink);
+}
+
+.contact-instagram:hover svg {
+  transform: translate(2px, -2px);
 }
 
 .contact-foot {

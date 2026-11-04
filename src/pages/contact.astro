@@ -36,6 +36,17 @@ import { site } from '../data/projects';
           <Icon name="copy" size={13} />
           <span data-copy-label aria-live="polite">Copy email</span>
         </button>
+        <a
+          class="contact-instagram"
+          href={site.instagram}
+          target="_blank"
+          rel="me noopener"
+          aria-label={`${site.name} on Instagram (opens in a new tab)`}
+        >
+          <span>Instagram</span>
+          <span class="contact-instagram__handle">{site.instagramHandle}</span>
+          <Icon name="arrow-up-right" size={12} />
+        </a>
       </div>
     </div>
 
