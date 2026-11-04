@@ -86,22 +86,35 @@ npm run cv
 
 This builds the site, prints the CV page, and finalises the PDF. The finalisation step uses Python 3 and PyMuPDF (`pip install pymupdf`). The committed PDF is ready to use even without running this command.
 
-## Firebase preview deployment
+## Firebase deployment
 
-Live preview: **https://natalia-afentoulidou.web.app**
+Live site: **https://natalia-afentoulidou.web.app**
 
 - Firebase project: `natalia-afentoulidou`
 - Plan: **Spark**  —  no billing account is attached to this project.
 - The existing Blaze project (`keen-wavelet-275120`, the news app) was left untouched.
 - Deploy again with `npm run deploy`.
-- The preview currently sends `X-Robots-Tag: noindex, nofollow` so search engines do not index the `web.app` address. Remove that header from `firebase.json` and redeploy when the site goes live on its final domain.
+- The site is indexable: `robots.txt` allows crawling and the sitemap is at `https://nataliaafentoulidou.com/sitemap-index.xml`. Submit that sitemap in Google Search Console and Bing Webmaster Tools after DNS is fully live.
 - Free Spark Hosting includes 10 GB storage and 360 MB/day of data transfer. This build is about 15 MB of storage; testing traffic should fit comfortably, but the site will hard-stop at the free data limit rather than bill.
-- The preview is public to anyone with the link; Firebase Hosting on Spark does not provide password protection.
+- The site is public to anyone with the link; Firebase Hosting on Spark does not provide password protection.
 
 ## Notes before going live
 
-- This build is a redesign in the workspace; the existing WordPress site is still live at the domain. Deploy the build, review it on the host, then point DNS when ready.
+- This build is the live site; the old WordPress site is no longer served at the domain.
 - Confirm the project titles and the Untitled work.
 - Add an Instagram/social link if wanted.
 - The CV is now a newly designed document; review the text against the old CV and confirm any details.
 - All images remain © Natalia Afentoulidou.
+
+## Search visibility and analytics
+
+The site is indexable: `robots.txt` allows all crawlers and the sitemap is at `https://nataliaafentoulidou.com/sitemap-index.xml`.
+
+Recommended free setup:
+
+1. **Google Search Console** — add a Domain property for `nataliaafentoulidou.com`, verify with the DNS TXT record in Cloudflare, then submit the sitemap. Use URL Inspection to request indexing for the home page, Bio and the three works.
+2. **Bing Webmaster Tools** — import the site from Search Console and submit the same sitemap.
+3. **Cloudflare Web Analytics** — free and cookieless. Add the site in Cloudflare, then add the generated JS snippet to `src/layouts/BaseLayout.astro` before `</head>`.
+4. **Google Analytics 4** — optional; only if a consent banner is added for EU visitors.
+
+For SEO, the strongest signals are the artist/project texts, descriptive image alt text, backlinks from exhibition and press pages, and regular updates. Avoid keyword stuffing, cloaking, paid link schemes and hidden text.
