@@ -1362,7 +1362,7 @@ strong {
 .selected-card__media {
   position: relative;
   overflow: hidden;
-  background: #fff;
+  background: var(--paper-deep);
 }
 
 .selected-card__media img {
