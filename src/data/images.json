@@ -25,29 +25,34 @@
     "fallback": "/images/works/2026-01-1141.webp"
   },
   "2026-02": {
-    "width": 1141,
-    "height": 801,
-    "ratio": 1.42447,
+    "width": 1472,
+    "height": 1014,
+    "ratio": 1.45168,
     "color": "#080808",
-    "lqip": "data:image/webp;base64,UklGRqQAAABXRUJQVlA4IJgAAADwBgCdASokABkAPwFyr1ErJqQiqrgMAWAgCWUAxnxBkMgCMGFQJHUIFq8hd5LHuoq8zCAI1S/lPZhuY8mp/S4AAPhCJK1IEU1O3HFQTAKwCQoEYWSn6UNgCI5CFBqU3OOBjG2TEaQYGAy1/MF3cVouoU8iDcMATm6rdf6XI+0yqjXeB+z+3XQjRtt0rL8CElyYTfUkq4AAAA==",
+    "lqip": "data:image/webp;base64,UklGRq4AAABXRUJQVlA4IKIAAADwBgCdASokABkAPwForE+rJaQiMBVdUWAgCWkA0ycxyk5YsI4GoS/lwdCUHE+8LzHxHfYzT89OI/SitupnDYkAAP7HZXysoo5HZtuhp5prDyNJfDsF46mE6DkPQYvdI4xebNKKxYrxlsGjFEvta17exEnH3BjlaWiEN0ffBUOPbEVFL67OXJNKAfIgZuOka5ea/WA4YaJWlQFGPm43oD/IAAA=",
     "sources": [
       {
         "width": 480,
-        "height": 337,
+        "height": 331,
         "path": "/images/works/2026-02-480.webp"
       },
       {
         "width": 800,
-        "height": 562,
+        "height": 551,
         "path": "/images/works/2026-02-800.webp"
       },
       {
-        "width": 1141,
-        "height": 801,
-        "path": "/images/works/2026-02-1141.webp"
+        "width": 1200,
+        "height": 827,
+        "path": "/images/works/2026-02-1200.webp"
+      },
+      {
+        "width": 1472,
+        "height": 1014,
+        "path": "/images/works/2026-02-1472.webp"
       }
     ],
-    "fallback": "/images/works/2026-02-1141.webp"
+    "fallback": "/images/works/2026-02-1472.webp"
   },
   "2026-03": {
     "width": 842,

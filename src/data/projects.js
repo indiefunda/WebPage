@@ -56,7 +56,7 @@ export const projects = [
         medium: paper,
         dimensions: '150 × 210 cm',
         year: 2026,
-        alt: 'Large black-and-white drawing of bulbous, dotted forms tangled around pale looping limbs.',
+        alt: 'Large black-and-white drawing of dotted bulbous masses, pale looping limbs, hands and mushroom-like forms.',
         featured: true,
       },
       {
